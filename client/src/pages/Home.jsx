@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import films from "../data/films"; // ваш массив фильмов
+import MapLeaflet from "../components/MapLeaflet";
 import "../css/Home.css";
 
 export default function HomePage() {
@@ -143,8 +144,7 @@ export default function HomePage() {
                 <div className="hp-description-text">
                   {/* Оставлено место для текста описание — замените на нужный */}
                   <p>
-                    Здесь будет краткое описание проекта. Вставьте несколько
-                    абзацев или массив абзацев.
+                    Хроники патриотизма — открытый цифровой архив архивных и документальных фильмов с подробными карточками, источниками и контекстными заметками. Проект упрощает поиск и просмотр исторических материалов, привлекает сообщество для уточнения данных.
                   </p>
                 </div>
               </div>
@@ -205,7 +205,10 @@ export default function HomePage() {
                 <h2 className="hp-section-title">Контакты</h2>
                 <div className="hp-contacts-text">
                   {/* Оставьте место — заполните позже */}
-                  <p>Здесь разместится контактная информация проекта.</p>
+                  <p>Над проектом работали:</p>
+                  <p>{ /* </p><a href="https://t.me/aleksandr_lukashenko">Александр Лукашенко</a>*/ }  Хлименков Герман (главный програмист)</p>
+                  <p>Рыбак Андрей (дизайнер)</p>
+                  <p>Татьяна Владимировна (организатор)</p>
                 </div>
 
                 <div
@@ -214,7 +217,7 @@ export default function HomePage() {
                   aria-label="Карта местоположения"
                 >
                   {/* Вставьте карту (iframe или компонент) здесь */}
-                  <div className="hp-map-box">[Здесь будет карта]</div>
+                  <div className="hp-map-box"><MapLeaflet lat={53.9018296} lng={27.4402926} zoom={26} /></div>
                 </div>
               </div>
             </div>

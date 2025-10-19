@@ -118,7 +118,7 @@
 
 /* specific positions */
 .hp-arrow-down {
-  bottom: 28px;
+  bottom: 4.5vh;
 }
 .hp-arrow-up {
   top: 6vh;
@@ -260,6 +260,9 @@
   justify-content: center;
   color: #9aa6b2;
 }
+.hp-map-box { height: 420px; width: 100%; min-height: 260px; }
+.map-wrapper { height: 100%; width: 100%; }
+
 
 /* Responsive tweaks */
 @media (max-width: 900px) {
