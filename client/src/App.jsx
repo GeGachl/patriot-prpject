@@ -5,7 +5,6 @@ import Home from "./pages/Home";
 import MoviePage from "./pages/MoviePage";
 import EventPage from "./pages/EventPage";
 import "./css/App.css";
-import { Analytics } from "@vercel/analytics/next"
 
 export default function App() {
   return (
@@ -18,7 +17,6 @@ export default function App() {
           <Route path="/movie/:id/event" element={<EventPage />} />
         </Routes>
       </main>
-      <Analytics />
     </div>
   );
 }
