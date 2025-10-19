@@ -1,0 +1,44 @@
+/* src/assets/css/App.css */
+
+/* 1) Корни — обязательно */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* 2) Корневая обёртка приложения */
+.app-root {
+  min-height: 100vh;        /* всегда не меньше окна */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: var(--page-bg, #03131a);
+  color: var(--page-text, #d7e8f8);
+}
+
+/* 3) Основная область — занимает оставшееся пространство */
+.app-main {
+  flex: 1 1 auto;           /* растягивается */
+  min-height: 0;            /* важно: позволяет детям overflow работать корректно */
+  min-width: 0;             /* важно для flex-переносов внутри */
+  display: block;
+}
+
+/* 4) Защита от чрезмерного сжатия вложенных флекс-элементов
+   (часто помогает, если внутри используются flex-контейнеры) */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* 5) Опционально: переменная для высоты header, используемая в HomePage */
+:root {
+  --header-height: 64px; /* подстрой под реальную высоту header */
+}
+
+/* если где-то есть глобальные правила overflow:hidden на body/главных контейнерах — отключаем их */
+body, .app-root, .app-main {
+  overflow: visible;
+}
