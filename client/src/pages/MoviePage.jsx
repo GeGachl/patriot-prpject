@@ -69,13 +69,9 @@ export default function MoviePage() {
               <br />
               <strong>Длительность:</strong> {film.runtime || "—"}
             </p>
+            
           </div>
         </aside>
-      </div>
-      <div className="movie-actions-bottom">
-        <Link className="back-home-inline" to="/">
-          ← На главную
-        </Link>
       </div>
     </div>
   );
