@@ -1,75 +1,123 @@
+// src/pages/EventPage.jsx
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import films from "../data/films";
 import "../css/Event.css";
 
+/*
+  Ожидаемая структура в films.js (пример одного элемента):
+  {
+    id: "film-1",
+    title: "Название фильма",
+    subtitle: "Год, режиссер",
+    poster: "/path/to/poster.jpg",
+    content: [
+      { type: "image", id: "m1", src: "/imgs/1.jpg", alt: "сцена 1", caption: "Сцена 1" },
+      { type: "text", id: "t1", text: "Первый абзац с описанием сцены или события." },
+      { type: "image", id: "m2", src: "/imgs/2.jpg", alt: "сцена 2", caption: "Сцена 2" },
+      { type: "text", id: "t2", text: "Второй абзац." },
+      // ...
+    ]
+  }
+*/
+
+function PairBlock({ imageBlock, textBlock, reverse }) {
+  return (
+    <div className={`ep-pair ${reverse ? "ep-reverse" : ""}`}>
+      <figure className="ep-figure">
+        <img src={imageBlock.src} alt={imageBlock.alt || ""} loading="lazy" className="ep-img" />
+        {imageBlock.caption && <figcaption className="ep-caption">{imageBlock.caption}</figcaption>}
+      </figure>
+      <div className="ep-text">
+        <p>{textBlock?.text}</p>
+      </div>
+    </div>
+  );
+}
+
 export default function EventPage() {
   const { id } = useParams();
-  const film = films.find(f => String(f.id) === String(id)) || null;
-  const paragraphs = (film.full || "").split(/\n{2,}/).map(p => p.trim()).filter(Boolean);
+  const film = films.find(f => String(f.id) === String(id)) || films[0];
 
-  if (!film) {
-    return (
-      <div className="event-page">
-        <div className="event-header">
-          <h2 className="event-title">Фильм не найден</h2>
-          <Link to="/" className="to-movie-button">На главную</Link>
-        </div>
+  // Формируем блоки: если в content идут image,text,image,text... — парим их.
+  const blocks = [];
+  const content = Array.isArray(film.content) ? film.content : [];
 
-        <div className="event-layout">
-          <article className="event-content">
-            <p className="lead">Запись о фильме с id {id} отсутствует в базе.</p>
-            <div className="event-controls">
-              <Link to="/" className="home-link">На главную</Link>
-            </div>
-          </article>
-        </div>
-      </div>
-    );
+  for (let i = 0; i < content.length; ) {
+    const item = content[i];
+
+    if (item.type === "image") {
+      const next = content[i + 1];
+      if (next && next.type === "text") {
+        blocks.push({ kind: "pair", image: item, text: next });
+        i += 2;
+        continue;
+      } else {
+        blocks.push({ kind: "image-only", image: item });
+        i += 1;
+        continue;
+      }
+    }
+
+    if (item.type === "text") {
+      // Если следующие — image, тогда handled in image branch above when loop reaches that image.
+      // Если подряд несколько текстов — объединяем в один full-width блок.
+      let textConcat = item.text || "";
+      let j = i + 1;
+      while (j < content.length && content[j].type === "text") {
+        textConcat += "\n\n" + (content[j].text || "");
+        j++;
+      }
+      blocks.push({ kind: "text-full", text: textConcat });
+      i = j;
+      continue;
+    }
+
+    // Для любых других типов — просто вывести как full-width JSON (без краша)
+    blocks.push({ kind: "text-full", text: item.text || "" });
+    i += 1;
   }
 
   return (
-    <div className="event-page">
-      <div className="event-header">
-        <h2 className="event-title">{film.title}</h2>
-        <Link to={`/movie/${film.id}`} className="to-movie-button">Смотреть фильм</Link>
-      </div>
+    <article className="ep-root">
+      <header className="ep-header">
+        <Link to={`/movie/${film.id}`} className="to-movie-button"> Смотреть фильм</Link>
+        <h1 className="ep-title">{film.title}</h1>
+        {film.subtitle && <p className="ep-subtitle">{film.subtitle}</p>}
+      </header>
 
-      <div className="event-layout">
-        <article className="event-content" aria-labelledby="film-title">
-          <p className="lead">
-            <strong>{film.year}</strong>
-            {film.genre && <> • {film.genre}</>}
-            {film.runtime && <> • {film.runtime}</>}
-            {film.director && <> • Режиссёр: {film.director}</>}
-          </p>
-
-          <section className="event-body">
-            <h3>Полное описание</h3>
-            {paragraphs.length ? paragraphs.map((p,i) => <p key={i} className="body-paragraph">{p}</p>) : <p className="body-paragraph">Описание отсутствует</p>}
-
-            {film.sources && film.sources.length > 0 && (
-              <>
-                <h4>Источники и примечания</h4>
-                <ul className="sources-list">
-                  {film.sources.map((s, i) => <li key={i}>{s}</li>)}
-                </ul>
-              </>
-            )}
-          </section>
-        </article>
-
-        <aside className="event-aside" aria-label="Сведения о фильме">
-          <div className="card text-pictures">
-            <img
-              src={film.photo || "/posters/placeholder.jpg"}
-              alt={film.title}
-              className="pictures"
-              loading="lazy"
-            />
-          </div>
-        </aside>
-      </div>
-    </div>
+      <section className="ep-content">
+        {/* Рендерим подготовленные блоки */}
+        {blocks.map((b, idx) => {
+          if (b.kind === "pair") {
+            return (
+              <PairBlock
+                key={b.image.id || idx}
+                imageBlock={b.image}
+                textBlock={b.text}
+                reverse={idx % 2 === 1}
+              />
+            );
+          }
+          if (b.kind === "image-only") {
+            return (
+              <div key={b.image.id || idx} className="ep-single-image">
+                <figure className="ep-figure">
+                  <img src={b.image.src} alt={b.image.alt || ""} loading="lazy" className="ep-img" />
+                  {b.image.caption && <figcaption className="ep-caption">{b.image.caption}</figcaption>}
+                </figure>
+              </div>
+            );
+          }
+          return (
+            <div key={idx} className="ep-text ep-text-full">
+              {b.text.split("\n\n").map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+          );
+        })}
+      </section>
+    </article>
   );
 }

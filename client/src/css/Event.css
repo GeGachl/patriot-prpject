@@ -1,30 +1,115 @@
-/* Общая обёртка */
-.event-page {
-  max-width: 1200px;
-  max-height: 600px;
-  margin: 24px auto;
-  padding: 16px;
+/* EventPage.css */
+.ep-root {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 20px;
+  box-sizing: border-box;
+  color: #eaf6ff;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.ep-header {
+  margin-bottom: 18px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 8px;
 }
-
-/* Хедер: заголовок + заметная кнопка в правом верхнем углу */
-.event-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+.ep-back {
+  color: #3b82f6;
+  text-decoration: none;
+  font-size: 14px;
 }
-.event-title {
+.ep-title {
+  font-size: 28px;
+  margin: 0;
+  line-height: 1.1;
+}
+.ep-subtitle {
   margin: 0;
   color: #eaf6ff;
-  font-size: 1.4rem;
+  font-size: 15px;
 }
 
-/* Кнопка возврата к фильму — заметная с обводкой */
+/* poster row */
+.ep-poster-row {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.ep-poster {
+  width: 220px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(9,12,16,0.06);
+}
+.ep-meta {
+  color: #374151;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* content blocks */
+.ep-content {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* pair block: two columns */
+.ep-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+.ep-pair.ep-reverse {
+  direction: ltr;
+}
+.ep-pair.ep-reverse .ep-figure {
+  order: 2;
+}
+.ep-pair.ep-reverse .ep-text {
+  order: 1;
+}
+
+/* single image */
+.ep-single-image .ep-figure {
+  margin: 0;
+}
+
+/* figure and image */
+.ep-figure {
+  margin: 0;
+}
+.ep-img {
+  width: 100%;
+  height: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+  box-shadow: 0 6px 18px rgba(9,12,16,0.06);
+}
+.ep-caption {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #eaf6ff;
+}
+
+/* text column */
+.ep-text {
+  font-size: 16px;
+  color: #eaf6ff;
+  line-height: 1.7;
+}
+.ep-text-full {
+  grid-column: 1 / -1;
+}
 .to-movie-button {
   display: inline-block;
+  width: 17%;
   padding: 8px 14px;
   border-radius: 10px;
   font-weight: 700;
@@ -39,127 +124,19 @@
   background: rgba(75, 155, 214, 0.06);
   box-shadow: 0 12px 30px rgba(14, 38, 56, 0.55);
 }
-
-/* Макет основной части: контент + боковая панель */
-.event-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-@media (min-width: 980px) {
-  .event-layout {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 24px;
+/* responsive: single column on small screens */
+@media (max-width: 860px) {
+  .ep-pair {
+    grid-template-columns: 1fr;
   }
-  .event-content {
-    flex: 1;
+  .ep-pair.ep-reverse .ep-figure,
+  .ep-pair.ep-reverse .ep-text {
+    order: initial;
   }
-  .event-aside {
-    width: 320px;
-    flex: 0 0 320px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+  .ep-poster {
+    width: 140px;
   }
-}
-
-/* Контент статьи */
-.event-content {
-  background: linear-gradient(
-    180deg,
-    rgba(8, 20, 30, 0.14),
-    rgba(6, 14, 20, 0.08)
-  );
-  padding: 18px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  color: #d7e8f8;
-  line-height: 1.6;
-  max-height: 600px;
-  overflow-y: scroll;
-}
-.lead {
-  margin: 0 0 12px 0;
-  color: #eaf6ff;
-  font-weight: 600;
-}
-
-/* Тело текста */
-.event-body p {
-  margin: 0 0 10px 0;
-}
-
-/* Контролы под текстом — заметные ссылки */
-.event-controls {
-  margin-top: 12px;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-.home-link {
-  color: var(--muted);
-  text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 8px;
-}
-.back-to-movie-inline {
-  background: linear-gradient(90deg, #3a7ca5, #4b9bd6);
-  color: #fff;
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-weight: 700;
-  text-decoration: none;
-  box-shadow: 0 8px 20px rgba(43, 86, 110, 0.35);
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
-}
-.back-to-movie-inline:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(32, 72, 98, 0.45);
-}
-
-/* Боковая панель: карточки с метаданными */
-.aside-card {
-  background: rgba(255, 255, 255, 0.02);
-  padding: 14px 14px 45px 14px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  
-}
-.aside-title {
-  margin: 8px 0 8px 0;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-.aside-text {
-  margin: 0 0 12px 0;
-  color: #d7e8f8;
-  line-height: 1.4;
-}
-
-/* Кнопка в боковой панели */
-.aside-action {
-  display: inline-block;
-  padding: 10px 12px;
-  border-radius: 8px;
-  background: linear-gradient(90deg, #3a7ca5, #4b9bd6);
-  color: #fff;
-  font-weight: 700;
-  text-decoration: none;
-  box-shadow: 0 8px 20px rgba(43, 86, 110, 0.28);
-}
-.aside-action:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(32, 72, 98, 0.45);
-}
-
-/* Мелкие улучшения читабельности */
-.event-content p,
-.aside-text {
-  font-size: 0.98rem;
-}
-
-.pictures{
-  height: 100%;
-  width: 100%;
+  .ep-img {
+    max-height: 260px;
+  }
 }

@@ -102,17 +102,18 @@ export default function HomePage() {
             className="hp-slide hp-slide-intro"
             aria-label="Welcome slide"
           >
-            <div className="hp-intro-overlay">
-              <h1 className="hp-project-title">Хроники патриотизма</h1>
-            </div>
-
             <div className="hp-quote-placeholder" aria-hidden="false">
               {/* Оставлено место для цитаты — заполните текстом или компонентом */}
               <blockquote className="hp-quote">
+                <b >
                 «Мы - мирные люди, не хотим войны. Мы не богаты, но никого не
                 просим. Мы сами свое счастье заработаем. Лучше десятки и сотни
                 лет переговоров, чем один день войны» А.Г. Лукашенко
+                </b>
               </blockquote>
+            </div>
+            <div className="hp-intro-overlay">
+              <h1 className="hp-project-title">Хроники патриотизма</h1>
             </div>
 
             <button
