@@ -21,6 +21,22 @@
   font-size: 1.6rem;
 }
 
+.aside-card {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+.aside-title {
+  margin: 0 0 8px 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.aside-text {
+  margin: 0 0 12px 0;
+  color: #d7e8f8;
+  line-height: 1.4;
+}
 /* Кнопка На главную — в верхнем правом углу, с заметной обводкой */
 .home-button {
   display: inline-block;
@@ -51,7 +67,7 @@
   width: 100%;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   background: #000;
 }
 
@@ -136,7 +152,7 @@
 .back-home-inline:hover {
   color: var(--accent);
 }
-.poster-img{
-  height: 85%;
-  width: 85%;
+.poster-img {
+  height: 53vh;
+  width: 20vw;
 }

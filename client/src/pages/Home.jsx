@@ -108,8 +108,9 @@ export default function HomePage() {
                 <b >
                 «Мы - мирные люди, не хотим войны. Мы не богаты, но никого не
                 просим. Мы сами свое счастье заработаем. Лучше десятки и сотни
-                лет переговоров, чем один день войны» А.Г. Лукашенко
+                лет переговоров, чем один день войны»
                 </b>
+                <figcaption className="q-author">— А.Г. Лукашенко</figcaption>
               </blockquote>
             </div>
             <div className="hp-intro-overlay">

@@ -62,7 +62,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   height: 95vh;
-  background-image: url('../../imgs/main1.jpg');
+  background-image: url('../../imgs/main2.jpg');
 }
 
 /* Intro overlay: big project title centered */
@@ -84,6 +84,7 @@
   right: 36px;
   bottom: 36px;
   max-width: 360px;
+  background-color: #06121a;
 }
 .hp-quote {
   margin: 0;
