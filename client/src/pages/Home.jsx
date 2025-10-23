@@ -204,13 +204,12 @@ export default function HomePage() {
               </button>
 
               <div className="hp-contacts-content">
-                <h2 className="hp-section-title">Контакты</h2>
+                <h2 className="hp-section-title">Контакты:</h2>
                 <div className="hp-contacts-text">
                   {/* Оставьте место — заполните позже */}
-                  <p>Над проектом работали:</p>
-                  <p>{ /* </p><a href="https://t.me/aleksandr_lukashenko">Александр Лукашенко</a>*/ }  Хлименков Герман (главный програмист)</p>
-                  <p>Рыбак Андрей (дизайнер)</p>
-                  <p>Татьяна Владимировна (организатор)</p>
+                  <p>Главный програмист - Хлименков Герман (+375297704410)</p>
+                  <p>Дизайнер - Рыбак Андрей (+375445707905)</p>
+                  <p>Организатор - Татьяна Владимировна (+375298600732)</p>
                 </div>
 
                 <div
@@ -220,7 +219,9 @@ export default function HomePage() {
                 >
                   {/* Вставьте карту (iframe или компонент) здесь */}
                   <div className="hp-map-box"><MapLeaflet lat={53.9018296} lng={27.4402926} zoom={26} /></div>
-
+                </div>
+                <div className="hp-contacts-text">
+                  <p>Все фильмы взяты с киностудии Беларусьфильм</p>
                 </div>
               </div>
             </div>
