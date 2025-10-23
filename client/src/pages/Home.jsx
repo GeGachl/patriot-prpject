@@ -221,7 +221,7 @@ export default function HomePage() {
                   <div className="hp-map-box"><MapLeaflet lat={53.9018296} lng={27.4402926} zoom={26} /></div>
                 </div>
                 <div className="hp-contacts-text">
-                  <p>Все фильмы взяты с киностудии Беларусьфильм</p>
+                  <p> © Все фильмы взяты с киностудии Беларусьфильм</p>
                 </div>
               </div>
             </div>
