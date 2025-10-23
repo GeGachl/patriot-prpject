@@ -56,7 +56,7 @@ export default function MoviePage() {
         <aside className="event-aside" aria-label="Сведения о фильме">
           <div className="aside-card aside-poster">
             <img
-              src={film.poster || "/posters/placeholder.jpg"}
+              src={film.poster2 || "/posters/placeholder.jpg"}
               alt={film.title}
               className="poster-img"
               loading="lazy"
